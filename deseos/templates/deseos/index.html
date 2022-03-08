@@ -1,0 +1,71 @@
+{% extends 'deseos/base.html' %}
+
+{% block titulo %} Wishes! {% endblock%} 
+
+{% block contenido %}
+
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-8">
+        <h3 class="mt-3 mb-3">Your wish list:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wish in usuario.wishes.all %}
+                {% if wish.date_granted == null %}
+                <tr>
+                    <td>{{ wish.item }}</td>
+                    <td>{{ wish.created_at }}</td>
+                    <td><a href="#" class="btn btn-danger">Remove</a>|<a href="#" class="btn btn-primary">Edit</a>|<a href="#" class="btn btn-success">Granted</a></td>
+                </tr>
+                {%endif%}
+                {% endfor %}
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="mt-3 mb-3">Granted wishes:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Wisher</th>
+                    <th scope="col">Date added</th>
+                    <th scope="col">Date Granted</th>
+                    <th scope="col">Likes</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wish in allwishes %}
+                {% if wish.date_granted != null %}
+                <tr>
+                    <td>{{ wish.item }}</td>
+                    <td>{{wish.wisher}}</td>
+                    <td>{{ wish.created_at }}</td>
+                    <td>{{ wish.date_granted }}</td>
+                    <td>{{ wish.numero_likes }}</td>
+                    <td><a href="#">Like</a></td>
+                </tr>
+                {% endif%}
+                {% endfor %}
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-2">
+
+    </div>
+</div>
+
+{% endblock%}
